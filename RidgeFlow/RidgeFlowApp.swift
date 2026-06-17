@@ -10,23 +10,9 @@ import SwiftData
 
 @main
 struct RidgeFlowApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainMapView() // 👈 直接讓 App 啟動時開啟我們做的新地圖畫面
         }
-        .modelContainer(sharedModelContainer)
     }
 }

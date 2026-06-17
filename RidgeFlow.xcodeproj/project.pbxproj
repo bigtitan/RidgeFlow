@@ -39,11 +39,23 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		E8477C0C2FE277CE00A530AF /* Exceptions for "RidgeFlow" folder in "Copy Bundle Resources" phase from "RidgeFlow" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = E8477BC42FE2721600A530AF /* Resources */;
+			membershipExceptions = (
+				Service/GPXParserService.swift,
+				ViewModel/MapDashboardViewModel.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E8477BC82FE2721600A530AF /* RidgeFlow */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				E8477BE92FE2721700A530AF /* Exceptions for "RidgeFlow" folder in "RidgeFlow" target */,
+				E8477C0C2FE277CE00A530AF /* Exceptions for "RidgeFlow" folder in "Copy Bundle Resources" phase from "RidgeFlow" target */,
 			);
 			path = RidgeFlow;
 			sourceTree = "<group>";
@@ -290,6 +302,7 @@
 				CODE_SIGN_ENTITLEMENTS = RidgeFlow/RidgeFlow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CT28578W4W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RidgeFlow/Info.plist;
@@ -323,6 +336,7 @@
 				CODE_SIGN_ENTITLEMENTS = RidgeFlow/RidgeFlow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CT28578W4W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RidgeFlow/Info.plist;
