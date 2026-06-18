@@ -16,9 +16,24 @@ class MapDashboardViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var isImporting: Bool = false
     
-    private let parser = GPXParserService()
+    // 新增：監聽偏軌狀態與定位
+    @Published var isOffRouteAlert: Bool = false
     
-    // 處理外部檔案匯入
+    private let parser = GPXParserService()
+    private let locationTracker = LocationTracker() // 載入定位追蹤器
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        // 綁定 LocationTracker 的偏軌狀態到 ViewModel 的 @Published 屬性
+        locationTracker.$isOffRoute
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.isOffRouteAlert, on: self)
+            .store(in: &cancellables)
+            
+        // 啟動定位監聽
+        locationTracker.startTracking()
+    }
+    
     func importGPX(from url: URL) {
         isImporting = true
         Task {
@@ -32,7 +47,9 @@ class MapDashboardViewModel: ObservableObject {
                 
                 self.routeCoordinates = coords
                 
-                // 自動將地圖視角縮放到軌跡的起點
+                // 🔥 核心關鍵：將軌跡同步給定位追蹤器，開啟偏軌計算
+                self.locationTracker.gpxReferenceRoute = coords
+                
                 if let firstCoordinate = coords.first {
                     let region = MKCoordinateRegion(
                         center: firstCoordinate,
@@ -45,5 +62,10 @@ class MapDashboardViewModel: ObservableObject {
             }
             self.isImporting = false
         }
+    }
+    
+    // 供 UI 手動切換省電模式使用
+    func changePowerMode(_ mode: PowerSavingMode) {
+        locationTracker.applyPowerMode(mode)
     }
 }

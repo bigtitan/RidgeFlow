@@ -5,11 +5,9 @@
 //  Created by Titan Han on 2026/6/17.
 //
 
-
 import SwiftUI
 import MapKit
 import UniformTypeIdentifiers
-
 
 struct MainMapView: View {
     @StateObject private var viewModel = MapDashboardViewModel()
@@ -18,22 +16,51 @@ struct MainMapView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // iOS 17+ 原生地圖
+                // 1. 修正點：將地圖內容完整補上
                 Map(position: $viewModel.cameraPosition) {
-                    UserAnnotation() // 顯示使用者當前綠點
                     
-                    // 繪製 GPX 軌跡
+                    // 👉 關鍵 A：在這裡繪製 GPX 軌跡線
                     if !viewModel.routeCoordinates.isEmpty {
                         MapPolyline(coordinates: viewModel.routeCoordinates)
-                            .stroke(.orange, lineWidth: 5)
+                            .stroke(.blue, lineWidth: 5) // 明亮的藍色與 5 級粗細
                     }
+                    
+                    // 👉 關鍵 B：在地圖上顯示藍色目前位置小圓點（登山防迷核心）
+                    UserAnnotation()
                 }
                 .mapControls {
-                    MapUserLocationButton() // 原生定位按鈕
-                    MapCompass()           // 指北針
+                    MapUserLocationButton()
+                    MapCompass()
+                }
+                // 👉 關鍵 C：強制刷新機制
+                // 當匯入新 GPX，點的數量改變時，強制讓 Map 元件重新渲染，防止 MapKit 偷懶不畫線
+                .id(viewModel.routeCoordinates.count)
+                
+                // 👉 新增：偏軌紅色警示橫幅
+                if viewModel.isOffRouteAlert {
+                    VStack {
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(.white)
+                            Text("注意：您已偏離迷路！請切回正軌")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.red.opacity(0.9))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        .shadow(radius: 5)
+                        
+                        Spacer() // 頂到最上方
+                    }
+                    .padding(.top, 10)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .animation(.default, value: viewModel.isOffRouteAlert)
                 }
                 
-                // 載入中狀態提示
+                // 載入中的進度條提示（可選）
                 if viewModel.isImporting {
                     ProgressView("正在解析 GPX 軌跡...")
                         .padding()

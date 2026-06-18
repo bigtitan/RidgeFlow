@@ -39,23 +39,11 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		E8477C0C2FE277CE00A530AF /* Exceptions for "RidgeFlow" folder in "Copy Bundle Resources" phase from "RidgeFlow" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = E8477BC42FE2721600A530AF /* Resources */;
-			membershipExceptions = (
-				Service/GPXParserService.swift,
-				ViewModel/MapDashboardViewModel.swift,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E8477BC82FE2721600A530AF /* RidgeFlow */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				E8477BE92FE2721700A530AF /* Exceptions for "RidgeFlow" folder in "RidgeFlow" target */,
-				E8477C0C2FE277CE00A530AF /* Exceptions for "RidgeFlow" folder in "Copy Bundle Resources" phase from "RidgeFlow" target */,
 			);
 			path = RidgeFlow;
 			sourceTree = "<group>";
@@ -306,6 +294,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RidgeFlow/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -340,6 +329,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RidgeFlow/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
